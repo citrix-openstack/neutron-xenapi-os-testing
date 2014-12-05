@@ -42,6 +42,11 @@ export DEVSTACK_GATE_XENAPI_DOMU_IP=192.168.33.1
 export DEVSTACK_GATE_XENAPI_PASSWORD=password
 export DEVSTACK_GATE_CLEAN_LOGS=0
 
+
+# Neutron settings from job template tempest-dsvm-neutron-full-non-isolated
+export DEVSTACK_GATE_NEUTRON=1
+export DEVSTACK_GATE_TEMPEST_DISABLE_TENANT_ISOLATION=1
+
 set -u
 
 # Need to let jenkins sudo as domzero
