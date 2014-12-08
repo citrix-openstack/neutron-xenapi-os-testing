@@ -74,6 +74,10 @@ PUBNET=$(run_in_domzero xe network-create name-label=pubnet </dev/null)
 PUBVIF=$(run_in_domzero xe vif-create vm-uuid=$APP network-uuid=$PUBNET device=4 </dev/null)
 run_in_domzero xe vif-plug uuid=$PUBVIF </dev/null
 
+# For neutron we'll need an integration bridge as well
+INTNET=$(run_in_domzero xe network-create name-label=intnet </dev/null)
+export DEVSTACK_GATE_XS_INT_BR=$(run_in_domzero xe network-param-get param-name=bridge uuid=$INTNET </dev/null)
+
 # Hack iSCSI SR
 run_in_domzero << SRHACK
 set -eux
@@ -142,6 +146,7 @@ CRONTAB
         cat tools/xen/functions
         echo "create_directory_for_images"
         echo "create_directory_for_kernels"
+        echo "attach_network intnet"
     } | run_in_domzero
 )
 
