@@ -150,6 +150,13 @@ CRONTAB
     sudo cp /home/jenkins/xenapi-os-testing/tempest_exclusion_list /opt/stack/new/tempest/.excluded_tests
 )
 
+## Also check out a custom revision of devstack to help neutron testing
+(
+    cd /opt/stack/new/devstack
+    sudo git fetch https://github.com/citrix-openstack/devstack neutron
+    sudo git checkout FETCH_HEAD
+)
+
 }
 
 # Insert a rule as the first position - allow all traffic on the mgmt interface
