@@ -67,6 +67,7 @@ APP=$(run_in_domzero xe vm-list name-label=$APPLIANCE_NAME --minimal </dev/null)
 # Create a vm network
 VMNET=$(run_in_domzero xe network-create name-label=vmnet </dev/null)
 VMVIF=$(run_in_domzero xe vif-create vm-uuid=$APP network-uuid=$VMNET device=3 </dev/null)
+export DEVSTACK_GATE_XENAPI_FLATNET=$(run_in_domzero xe network-param-get param-name=bridge uuid=$VMNET </dev/null)
 run_in_domzero xe vif-plug uuid=$VMVIF </dev/null
 
 # Create pub network
